@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Runtime / local eval artifacts (regenerated locally)
+memories.jsonl
+memories.jsonl.tmp
+eval_input.jsonl
+answers.jsonl
+judge.jsonl
+uvicorn.log
+
+# Project data (not source)
+.codebuddy/
+
+# OS
+.DS_Store
+Thumbs.db

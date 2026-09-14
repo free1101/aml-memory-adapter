@@ -1,0 +1,15 @@
+# Keep the built image free of local data and tooling.
+.codebuddy/
+__pycache__/
+*.pyc
+.venv/
+venv/
+.git/
+
+# Runtime / local eval artifacts (regenerated at runtime, never shipped)
+memories.jsonl
+memories.jsonl.tmp
+eval_input.jsonl
+answers.jsonl
+judge.jsonl
+uvicorn.log
