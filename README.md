@@ -82,7 +82,7 @@ python -m uvicorn app:app --host 0.0.0.0 --port 8000
 
 What to paste into the Evaluation Access Request:
 - System name / version: `aml-memory-adapter` (placeholder retriever)
-- Repository (public): `<your public GitHub repo URL>`
+- Repository (public): `https://github.com/free1101/aml-memory-adapter`
 - Docker build/run: `docker build -t aml-memory-adapter .` then
   `docker run -p 8000:8000 aml-memory-adapter`
 - Add URL: `http://<host>:8000/add`  ·  Search URL: `http://<host>:8000/search`
@@ -100,3 +100,22 @@ reset on every redeploy). Keep it private, avoid logs, and delete within 30 days
   platform feeds `data[].content` straight into its fixed `ANSWER_MODEL`.
 - `store.search` is the SINGLE swap point for a real retriever
   (embedding + hybrid). Nothing else needs to change.
+
+## 7. 9/20 submission checklist (copy-paste into the Access Request)
+When the second evaluation cycle opens (around 2026-09-20), submit an
+**Evaluation Access Request** on the leaderboard with these exact values:
+
+| Field | Value |
+|-------|-------|
+| System name / version | `aml-memory-adapter` (placeholder retriever) |
+| Repository (public) | https://github.com/free1101/aml-memory-adapter |
+| Docker build | `docker build -t aml-memory-adapter .` |
+| Docker run | `docker run -p 8000:8000 aml-memory-adapter` |
+| Add URL | `http://<host>:8000/add` |
+| Search URL | `http://<host>:8000/search` |
+| Health URL | `http://<host>:8000/health` |
+| Auth | `none` |
+| `top_k` | `100` |
+
+After submission the maintainers build the image, deploy it, and run the
+compatibility smoke (Add -> Search). Fix any mismatch from the smoke feedback.
