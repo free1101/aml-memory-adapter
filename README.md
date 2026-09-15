@@ -10,10 +10,12 @@ pip install -r requirements.txt
 python -m uvicorn app:app --host 127.0.0.1 --port 8000
 ```
 
-## 1. Local contract smoke (no LLM, no Key)
+## 1. Local contract smoke (no LLM, no Key) — one command
 ```bash
 python smoke_test.py
 ```
+Auto-starts `uvicorn app:app` (polls `/health` until ready), runs the assertions
+over **real HTTP**, then tears the server down. No second terminal needed.
 Asserts: `Add` echoes `request_id`/`user_id`/`session_id` + `success:true`;
 `Search` returns top-level `data[]` with non-empty `id`/`content`; an unrelated
 `user_id` returns `[]` (no cross-user leak).

@@ -16,6 +16,11 @@ uvicorn.log
 .codebuddy/
 .review/
 
+# Local tool artifacts (CodeBuddy / Claude) — not part of the adapter
+CLAUDE.md
+sample.md
+协作文档.md
+
 # OS
 .DS_Store
 Thumbs.db
