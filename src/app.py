@@ -10,16 +10,27 @@ The fixed platform ANSWER/JUDGE models read `data[].content` directly, so
 whatever your `Search` returns is what gets scored.
 """
 from __future__ import annotations
-from fastapi import FastAPI
-from pydantic import BaseModel
+from fastapi import FastAPI, Request
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel, Field
 from store import MemoryStore
 
 store = MemoryStore(persist_path="memories.jsonl")
 app = FastAPI(title="AML Memory Adapter")
 
+@app.exception_handler(RequestValidationError)
+async def _validation_error(request: Request, exc: RequestValidationError):
+    # Platform-preferred {"detail": {"reason": ...}} envelope, keeping the
+    # structured field errors for troubleshooting.
+    return JSONResponse(
+        status_code=422,
+        content={"detail": {"reason": "request validation failed", "errors": exc.errors()}},
+    )
+
 class AddMessage(BaseModel):
     role: str                       # "user" | "assistant"
-    content: str
+    content: str = Field(min_length=1)  # non-empty per contract
     timestamp: int | None = None    # Unix milliseconds
 
 class AddRequest(BaseModel):

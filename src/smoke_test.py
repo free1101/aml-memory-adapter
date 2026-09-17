@@ -11,9 +11,14 @@ Saves you the 1/hour official smoke quota.
 """
 from __future__ import annotations
 import json
+import os
 import subprocess
 import sys
 import time
+
+# Ensure the spawned `uvicorn app:app` finds app.py / store.py even when this
+# script is launched from the repo root (e.g. `python src/smoke_test.py`).
+_HERE = os.path.dirname(os.path.abspath(__file__))
 import urllib.error
 import urllib.request
 
@@ -24,6 +29,7 @@ PORT = 8000
 def _start_server() -> subprocess.Popen:
     proc = subprocess.Popen(
         [sys.executable, "-m", "uvicorn", "app:app", "--port", str(PORT)],
+        cwd=_HERE,
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
     )

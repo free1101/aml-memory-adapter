@@ -21,6 +21,16 @@ CLAUDE.md
 sample.md
 协作文档.md
 
+# Notes / scratch docs (not part of the adapter, do not push to GitHub)
+# 用通配避免以后新增笔记也被误传；注意：不用裸 *.md/*.txt，会误伤 README.md
+笔记*
+*.笔记.md
+*技术图谱*.md
+*架构与实现*.md
+
+# Personal / non-committed documentation lives here
+doc/
+
 # OS
 .DS_Store
 Thumbs.db

@@ -9,7 +9,12 @@ retrieval_quality.py do against a running server.
 from __future__ import annotations
 import json
 import os
+import sys
 import time
+
+# Make sibling modules (app, retrieval_quality) importable no matter which
+# directory the script is launched from.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 # Clean rerun: drop any persisted state so results are deterministic.
 for _f in ("memories.jsonl", "eval_input.jsonl"):
