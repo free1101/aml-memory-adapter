@@ -36,20 +36,10 @@ python retrieval_quality.py
 Token-recall of the gold answer inside `retrieved_context`. Independent of the
 platform `ANSWER`/`JUDGE` models.
 
-## 4. Real end-to-end score (still local, YOUR questions only)
-Needs an OpenAI-compatible endpoint. Set env:
-```bash
-ANSWER_API_BASE / ANSWER_API_KEY / ANSWER_MODEL
-JUDGE_API_BASE  / JUDGE_API_KEY  / JUDGE_MODEL
-```
-Clone the official `data/<bench>/pipeline.py` and run (the CLI `--model` flag is
-IGNORED; models come from `api_config` env vars):
-```bash
-python data/locomo-refined/pipeline.py answer   --input eval_input.jsonl --output answers.jsonl
-python data/locomo-refined/pipeline.py evaluate --input eval_input.jsonl --answers answers.jsonl --output judge.jsonl
-```
-NOTE: this scores YOUR questions, not the private held-out benchmark. The private
-benchmark + AML Key are required for a rankable leaderboard score.
+## 4. Real end-to-end score — not needed for the Code route
+The Code route uses `auth=none`; the platform runs the unified Answer/Judge models
+itself, so you do **not** run `pipeline.py` or score anything locally. (Sections 0–3
+are enough to validate the contract before submission.)
 
 ## 5. Official leaderboard — Hosted route (needs an AML Key)
 Apply for an AML Key (`/evaluation`), deploy `Add`/`Search` to a PUBLIC url (not
